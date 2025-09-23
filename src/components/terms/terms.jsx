@@ -1,8 +1,35 @@
-import React from 'react';
+import { useEffect } from 'react';
 import './terms.css';
 
 const Terms = () => {
   const lastUpdated = "January 15, 2025";
+
+   useEffect(() => {
+    // Если пришли на страницу без внутреннего якоря — прокрутить вверх
+    if (!window.location.hash || window.location.hash === '#/terms') {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }
+  }, []);
+
+const getTopBarHeight = () => {
+  const all = Array.from(document.body.querySelectorAll('*'));
+  const candidates = all.filter(el => {
+    const cs = getComputedStyle(el);
+    const top = parseInt(cs.top || '0', 10);
+    return (cs.position === 'fixed' || cs.position === 'sticky') && top === 0 && el.offsetHeight > 0;
+  });
+  return candidates.length ? Math.max(...candidates.map(el => el.offsetHeight)) : 0;
+};
+
+const scrollTo = (id) => (e) => {
+  e.preventDefault();
+  const el = document.getElementById(id);
+  if (!el) return;
+  const headerOffset = getTopBarHeight() || 96; // запас по умолчанию
+  const y = el.getBoundingClientRect().top + window.scrollY - headerOffset;
+  window.scrollTo({ top: y, behavior: 'smooth' });
+};
+
 
   return (
     <div className="terms-page">
@@ -23,16 +50,16 @@ const Terms = () => {
           <div className="terms-nav-content">
             <h3>Quick Navigation</h3>
             <div className="nav-links">
-              <a href="#acceptance">Acceptance</a>
-              <a href="#description">Service Description</a>
-              <a href="#accounts">User Accounts</a>
-              <a href="#usage">Acceptable Use</a>
-              <a href="#payment">Payment Terms</a>
-              <a href="#privacy">Privacy & Data</a>
-              <a href="#intellectual">Intellectual Property</a>
-              <a href="#limitation">Limitation of Liability</a>
-              <a href="#termination">Termination</a>
-              <a href="#contact">Contact</a>
+  <a href="#acceptance" onClick={scrollTo('acceptance')}>Acceptance</a>
+  <a href="#description" onClick={scrollTo('description')}>Service Description</a>
+  <a href="#accounts" onClick={scrollTo('accounts')}>User Accounts</a>
+  <a href="#usage" onClick={scrollTo('usage')}>Acceptable Use</a>
+  <a href="#payment" onClick={scrollTo('payment')}>Payment Terms</a>
+  <a href="#privacy" onClick={scrollTo('privacy')}>Privacy & Data</a>
+  <a href="#intellectual" onClick={scrollTo('intellectual')}>Intellectual Property</a>
+  <a href="#limitation" onClick={scrollTo('limitation')}>Limitation of Liability</a>
+  <a href="#termination" onClick={scrollTo('termination')}>Termination</a>
+  <a href="#contact" onClick={scrollTo('contact')}>Contact</a>
             </div>
           </div>
         </div>

@@ -1,7 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './contacts.css';
 
 const Contacts = () => {
+   useEffect(() => {
+    // без анимации
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    // если хочешь плавно: behavior: 'smooth'
+  }, []);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -11,6 +17,7 @@ const Contacts = () => {
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
