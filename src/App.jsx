@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom';
 import './App.css'
 
 // Hero Component
@@ -420,8 +421,8 @@ function App() {
           <div className="footer-links">
             <a href="#">Docs</a>
             <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-            <a href="#">Contact</a>
+            <Link to="/terms">Terms</Link> 
+            <Link to="/contacts">Contact</Link> 
           </div>
           <p>&copy; 2025 AI-Consultant Widget</p>
         </div>
