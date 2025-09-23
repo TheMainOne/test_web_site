@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './App.css';
+import { useState, useEffect, useRef } from 'react'
+import './App.css'
 
 // Hero Component
 const Hero = () => {
@@ -88,7 +88,21 @@ const AIWidget = () => {
   const askQuestion = (question) => {
     setInputValue(question);
     // Trigger send after setting input
-    setTimeout(() => sendMessage(), 100);
+    setTimeout(() => {
+      if (!inputValue.trim()) return;
+
+      // Add user message
+      setMessages(prev => [...prev, { type: 'user', text: question }]);
+
+      // Add bot response after delay
+      setTimeout(() => {
+        setMessages(prev => [...prev, { 
+          type: 'bot', 
+          text: generateResponse(question),
+          isHtml: true
+        }]);
+      }, 1000);
+    }, 100);
   };
 
   const handleKeyPress = (e) => {
@@ -212,8 +226,7 @@ const PricingCard = ({ title, price, period, description, isPopular, buttonText,
   </div>
 );
 
-// Main App Component
-const App = () => {
+function App() {
   useEffect(() => {
     // Smooth scrolling for demo link
     const demoLink = document.querySelector('a[href="#demo"]');
@@ -415,6 +428,6 @@ const App = () => {
       </footer>
     </div>
   );
-};
+}
 
 export default App;
