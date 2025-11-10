@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom';
 import './App.css'
 
+
 // Hero Component
 const Hero = () => {
   return (
