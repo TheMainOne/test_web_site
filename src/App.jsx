@@ -3,6 +3,46 @@ import { Link } from 'react-router-dom';
 import './App.css'
 
 
+// Встраивает iframe-режим виджета в переданный контейнер
+const InlineAIW = ({
+  siteId = "ZORKA_SITE_001",
+  targetId = "zorka-chat-slot",
+  height = 620,           // используется ТОЛЬКО для fit="content"
+  fit = "container",      // "container" | "content"
+}) => {
+  useEffect(() => {
+    // не дублируем лоадер
+    if (document.querySelector(`script[data-aiw-inline="${targetId}"]`)) return;
+
+    const s = document.createElement("script");
+    s.defer = true;
+    s.src = "https://cloudcompliance.duckdns.org/aiw/widget-loader.js";
+    s.setAttribute("data-host", "https://cloudcompliance.duckdns.org");
+    s.setAttribute("data-site-id", siteId);
+    s.setAttribute("data-mode", "inline");
+    s.setAttribute("data-target", `#${targetId}`);
+    s.setAttribute("data-height", String(height));
+    s.setAttribute("data-fit", fit);                 // ← НОВОЕ
+    s.setAttribute("data-aiw-inline", targetId);     // маркер, чтобы не вставлять 2 раза
+    document.body.appendChild(s);
+
+    return () => {
+      // при размонтаже можно s.remove(), если нужно
+    };
+  }, [siteId, targetId, height, fit]);
+
+  // слот для виджета
+  return (
+    <section className="aiw-inline-section">
+<div id={targetId} className="aiw-inline-slot" />
+
+
+    </section>
+  );
+};
+
+
+
 // Hero Component
 const Hero = () => {
   return (
@@ -180,16 +220,16 @@ const DemoSection = () => {
           </div>
         </div>
         
-        <div className="code-snippet">
-{`<script defer src="/aiw.js"></script>
-<script>
-window.AIW.init({ 
-    apiBase: "/api", 
-    brand: { name: "AI-Consultant Widget", color: "#7A68FF" }, 
-    starterPrompts: ["Price for 10 users", "Product bundle", "Book a demo"] 
-});
-</script>`}
-        </div>
+{/* Inline-виджет (iframe) */}
+<div style={{ marginTop: 0 }}>
+<InlineAIW
+  siteId="ZORKA_SITE_001"
+  targetId="zorka-chat-slot"
+  height={483}       
+  fit="content"     // ← ключевое  
+/>
+
+</div>
         
         <div className="demo-note">
           Want this on your site? Install in 1 line.
