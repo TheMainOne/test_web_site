@@ -374,6 +374,29 @@ body {
 }
 
 /* AI Widget Styles */
+/* Контейнер, который задаёт размер для inline-виджета */
+.aiw-inline-wrapper {
+  margin-top: 0;
+  width: 100%;
+  max-width: 1200px;
+  height: 800px;          /* ← здесь управляешь высотой секции с виджетом */
+  display: flex;          /* чтобы вложенная секция могла занять 100% */
+}
+
+/* Секция хоста внутри wrapper */
+.aiw-inline-section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+/* Слот, в который loader вставляет iframe */
+.aiw-inline-slot {
+  width: 100%;
+  height: 100%;
+}
+
+
 .ai-widget {
   background: white;
   border: 1px solid #E2E8F0;

@@ -22,7 +22,7 @@ const InlineAIW = ({
     s.setAttribute("data-mode", "inline");
     s.setAttribute("data-target", `#${targetId}`);
     s.setAttribute("data-height", String(height));
-    s.setAttribute("data-fit", fit);                 // ← НОВОЕ
+    s.setAttribute("data-fit", fit);                 
     s.setAttribute("data-aiw-inline", targetId);     // маркер, чтобы не вставлять 2 раза
     document.body.appendChild(s);
 
@@ -221,12 +221,11 @@ const DemoSection = () => {
         </div>
         
 {/* Inline-виджет (iframe) */}
-<div style={{ marginTop: 0 }}>
+<div className="aiw-inline-wrapper">
 <InlineAIW
   siteId="ZORKA_SITE_001"
-  targetId="zorka-chat-slot"
-  height={483}       
-  fit="content"     // ← ключевое  
+  targetId="zorka-chat-slot"  
+  fit="container"     // ← ключевое  
 />
 
 </div>

@@ -7,6 +7,8 @@ import App from './App.jsx';
 import Contacts from './components/contacts/contacts.jsx';
 import Terms from './components/terms/terms.jsx';
 import AiwEmbed from './test.jsx';
+import InlineHostPlayground from './components/InfluencerMarketingPage.jsx';
+
 
 
 
@@ -19,6 +21,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/" element={<App />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/terms" element={<Terms />} />
+         <Route path="/influencer" element={<InlineHostPlayground />} />
 
       </Routes>
     </HashRouter>

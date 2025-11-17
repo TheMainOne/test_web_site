@@ -1,0 +1,136 @@
+.inline-host-playground {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  padding: 32px;
+  background: #0b1120;
+  color: #e2e8f0;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.inline-playground-header {
+  max-width: 720px;
+  margin: 0 auto 32px;
+  text-align: center;
+}
+
+.inline-playground-header h1 {
+  font-size: 2.4rem;
+  margin-bottom: 12px;
+}
+
+.inline-playground-header p {
+  color: #94a3b8;
+  line-height: 1.4;
+}
+
+.inline-demo-panel {
+  background: #0f172a;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.inline-demo-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  align-items: center;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.95rem;
+  color: #cbd5f5;
+}
+
+.control select,
+.control input[type="range"] {
+  width: 100%;
+}
+
+.control select {
+  background: #0b1120;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: #e2e8f0;
+}
+
+.control input[type="range"] {
+  accent-color: #6366f1;
+}
+
+.control.checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.inline-demo-viewport {
+  background: #020617;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px dashed rgba(148, 163, 184, 0.5);
+  min-height: 320px;
+}
+
+.inline-demo-viewport.is-flex {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.inline-demo-host {
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 12px;
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.5);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.aiw-inline-section,
+.aiw-inline-slot {
+  width: 100%;
+  display: block;
+}
+
+.aiw-inline-section {
+  min-height: 0;
+}
+
+.aiw-inline-slot {
+  min-height: 0;
+}
+
+.aiw-inline-slot[data-fit="container"] {
+  height: 100%;
+}
+
+.aiw-inline-slot iframe {
+  border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+  .inline-host-playground {
+    padding: 16px;
+  }
+
+  .inline-demo-panel {
+    padding: 16px;
+  }
+
+  .inline-demo-controls {
+    grid-template-columns: 1fr;
+  }
+}
