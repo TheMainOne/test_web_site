@@ -232,25 +232,36 @@ function App() {
     }
   }, []);
 
-   useEffect(() => {
-    // чтобы не подцеплять скрипт два раза при HMR/перерендере
-    if (document.querySelector('script[data-aiw-inline="demo"]')) return;
+useEffect(() => {
+  // чтобы не подцеплять скрипт два раза при HMR/перерендере
+  if (document.querySelector('script[data-aiw-inline="demo"]')) return;
 
-    const s = document.createElement('script');
-    s.defer = true;
-    s.src = 'https://cloudcompliance.duckdns.org/aiw/widget-loader.js';
+  const isLocal =
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1";
 
-    s.setAttribute('data-host', 'https://cloudcompliance.duckdns.org');
-    s.setAttribute('data-site-id', 'ZORKA_SITE_001');
-    s.setAttribute('data-mode', 'inline');
-    s.setAttribute('data-target', '#aiw-inline-slot'); // 👈 важное отличие
-    s.setAttribute('data-fit', 'container');
+  const s = document.createElement("script");
+  s.defer = true;
+  s.setAttribute("data-aiw-inline", "demo");
+  s.setAttribute("data-mode", "inline");
+  s.setAttribute("data-target", "#aiw-inline-slot");
+  s.setAttribute("data-fit", "container");
 
-    // маркер, чтобы больше не добавлять
-    s.setAttribute('data-aiw-inline', 'demo');
+  if (isLocal) {
+    // 👉 ЛОКАЛЬНЫЙ РЕЖИМ
+    s.src = "http://localhost:3000/aiw/widget-loader.js";
+    s.setAttribute("data-host", "http://localhost:3000");
+    s.setAttribute("data-site-id", "ZORKA_SITE_001"); 
+  } else {
+    // 👉 ПРОДАКШЕН 
+    s.src = "https://cloudcompliance.duckdns.org/aiw/widget-loader.js";
+    s.setAttribute("data-host", "https://cloudcompliance.duckdns.org");
+    s.setAttribute("data-site-id", "ZORKA_SITE_001");
+  }
 
-    document.body.appendChild(s);
-  }, []);
+  document.body.appendChild(s);
+}, []);
+
 
   return (
     <div className="App">
